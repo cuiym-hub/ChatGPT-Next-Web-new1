@@ -233,6 +233,9 @@ export const useChatStore = create<ChatStore>()(
       },
 
       async onUserInput(content) {
+        if (content) {
+        }
+        return;
         const session = get().currentSession();
         const modelConfig = session.mask.modelConfig;
 
