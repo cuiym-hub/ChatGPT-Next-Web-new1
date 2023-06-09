@@ -489,7 +489,6 @@ export function Chat() {
     if (userInput.trim() === "") return;
     setIsLoading(true);
     //TODO aa
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     //const apikey = "8CTUXWGrWkerGQwIodfeTOKn";
     const apikey = "ROGuMD902GoK0tEj3rzcmkqS";
     //const secretKey = "H4DGouRhGxleNVOwGjxwFnwQk44uScSi";
@@ -510,7 +509,7 @@ export function Chat() {
         text: userInput,
       },
     };
-    fetch(proxyUrl + apiUrl, requestOptions)
+    fetch(apiUrl, requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error("请求失败");
