@@ -233,9 +233,6 @@ export const useChatStore = create<ChatStore>()(
       },
 
       async onUserInput(content) {
-        if (content) {
-        }
-        return;
         const session = get().currentSession();
         const modelConfig = session.mask.modelConfig;
 
@@ -250,7 +247,6 @@ export const useChatStore = create<ChatStore>()(
           id: userMessage.id! + 1,
           model: modelConfig.model,
         });
-
         const systemInfo = createMessage({
           role: "system",
           content: `IMPORTANT: You are a virtual assistant powered by the ${
