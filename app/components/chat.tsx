@@ -488,12 +488,44 @@ export function Chat() {
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
     setIsLoading(true);
-    chatStore.onUserInput(userInput).then(() => setIsLoading(false));
-    localStorage.setItem(LAST_INPUT_KEY, userInput);
-    setUserInput("");
-    setPromptHints([]);
-    if (!isMobileScreen) inputRef.current?.focus();
-    setAutoScroll(true);
+    //TODO aa
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    //const apikey = "8CTUXWGrWkerGQwIodfeTOKn";
+    const apikey = "ROGuMD902GoK0tEj3rzcmkqS";
+    //const secretKey = "H4DGouRhGxleNVOwGjxwFnwQk44uScSi";
+    const secretKey = "mxnoW1uEcIciHHwVgIjYLK4lOt3KYOrO";
+    const token =
+      "24.f17fa2cadc4522fd330d6394b5ef656a.2592000.1688900173.282335-34606028";
+    //const apiUrl = `https://aip.baidubce.com/oauth/2.0/token?client_id=${apikey}&client_secret=${secretKey}$&grant_type=client_credentials`;
+    const apiUrl =
+      "http://aip.baidubce.com/rest/2.0/solution/v1/text_censor/v2/user_defined?access_token=" +
+      token;
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+      form: {
+        text: userInput,
+      },
+    };
+    fetch(proxyUrl + apiUrl, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("请求失败");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.info(data);
+        chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+        localStorage.setItem(LAST_INPUT_KEY, userInput);
+        setUserInput("");
+        setPromptHints([]);
+        if (!isMobileScreen) inputRef.current?.focus();
+        setAutoScroll(true);
+      });
   };
 
   // stop response
