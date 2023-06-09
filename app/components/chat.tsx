@@ -497,7 +497,7 @@ export function Chat() {
       "24.f17fa2cadc4522fd330d6394b5ef656a.2592000.1688900173.282335-34606028";
     //const apiUrl = `https://aip.baidubce.com/oauth/2.0/token?client_id=${apikey}&client_secret=${secretKey}$&grant_type=client_credentials`;
     const apiUrl =
-      "http://aip.baidubce.com/rest/2.0/solution/v1/text_censor/v2/user_defined?access_token=" +
+      "https://aip.baidubce.com/rest/2.0/solution/v1/text_censor/v2/user_defined?access_token=" +
       token;
     const requestOptions = {
       method: "POST",
