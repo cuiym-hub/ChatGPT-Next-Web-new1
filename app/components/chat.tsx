@@ -488,7 +488,6 @@ export function Chat() {
 
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
-    setIsLoading(true);
     const apikey = "8CTUXWGrWkerGQwIodfeTOKn";
     const secretKey = "5I4LuDh02rbSv3dObLjcNuazuDG5QEsZ";
     const apiUrl = "http://localhost:4000/baiduapi/user_defined?access_token=";
@@ -505,7 +504,7 @@ export function Chat() {
       );
     }
 
-    getAccessToken().then((res) => {
+    return getAccessToken().then((res) => {
       res.json().then((data) => {
         const requestOptions = {
           method: "POST",
@@ -527,6 +526,7 @@ export function Chat() {
               message.error("禁止使用违禁词，请重新输入", 5);
               return;
             }
+            setIsLoading(true);
             chatStore.onUserInput(userInput).then(() => setIsLoading(false));
             localStorage.setItem(LAST_INPUT_KEY, userInput);
             setUserInput("");
